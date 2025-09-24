@@ -10,30 +10,32 @@ export const EjemploComponent = () => {
     const caja = useRef();
     const boton = useRef();
 
-    // useEffect(()=>{
-    //     console.log(boton.current.innerHtml);
-
-    //     if(caja.current == null) return;
-
-    //     const { boton } = boton.current.getBoundingClientReact();
-
-    //     // setTimeout(()=>{
-    //         caja.current.style.top = `${boton + 45}px`;
-    //         caja.current.style.left = `${boton + 45}px`;
-    //     // }, 1000);
-    // },[mostrar]);
-
-
-    useLayoutEffect(()=>{
-        console.log(boton.current.innerHtml);
+    useEffect(()=>{
+        console.log('Componente cargado o cambiado !!');
+        console.log(boton.current.innerHTML);
 
         if(caja.current == null) return;
 
-        const { boton } = boton.current.getBoundingClientReact();
+        const { bottom } = boton.current.getBoundingClientRect();
 
         // setTimeout(()=>{
-            caja.current.style.top = `${boton + 45}px`;
-            caja.current.style.left = `${boton + 45}px`;
+            caja.current.style.top = `${bottom + 45}px`;
+            caja.current.style.left = `${bottom + 45}px`;
+        // }, 1000);
+    },[mostrar]);
+
+
+    useLayoutEffect(()=>{
+        console.log('Componente cargado o cambiado !!');
+        console.log(boton.current.innerHTML);
+
+        if(caja.current == null) return;
+
+        const { bottom } = boton.current.getBoundingClientRect();
+
+        // setTimeout(()=>{
+            caja.current.style.top = `${bottom + 45}px`;
+            caja.current.style.left = `${bottom + 45}px`;
         // }, 1000);
     },[]);
 
@@ -55,6 +57,14 @@ export const EjemploComponent = () => {
         >
         Mostrar Mensaje
         </button>
+
+        {
+            mostrar && (
+                <div id="caja" ref={caja}>
+                    Hola, soy un Mensaje {mostrar}
+                </div>
+            )
+        }
     </div>
   )
 }
